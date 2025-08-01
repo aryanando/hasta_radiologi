@@ -17,8 +17,17 @@
     "test:docker": "node test/test-docker-worklist.js",
     "test:instance": "node test/test-dicom-instance.js",
     "test:workflow": "node test/test-complete-workflow.js",
+    "test:transmission": "node test/test-orthanc-transmission.js",
     "test:python-worklist": "node test/test-python-worklist.js",
-    "install:python-deps": "cd scripts && pip3 install -r requirements.txt"
+    "install:python-deps": "cd scripts && pip3 install -r requirements.txt",
+    "demo:create-send": "node examples/create-and-send-example.js",
+    "demo:batch": "node examples/batch-create-send.js",
+    "quick:demo": "node test/test-orthanc-transmission.js",
+    "quick:single": "node examples/create-and-send-example.js",
+    "quick:batch": "node examples/batch-create-send.js",
+    "dicom:send-demo": "npm run demo:create-send",
+    "dicom:send-batch": "npm run demo:batch",
+    "help": "node scripts/help.js"
   },
   "keywords": [
     "fastify",
