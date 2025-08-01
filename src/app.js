@@ -1,7 +1,9 @@
 const fastify = require('fastify')({ logger: true });
 const { PrismaClient } = require('@prisma/client');
+const OrthancWorklistController = require('./controllers/orthancWorklistController');
 
 const prisma = new PrismaClient();
+const worklistController = new OrthancWorklistController();
 
 // Register plugins
 fastify.register(require('@fastify/cors'), {
@@ -30,6 +32,9 @@ fastify.register(require('@fastify/env'), {
 
 // Add Prisma to Fastify context
 fastify.decorate('prisma', prisma);
+
+// Register Orthanc Worklist routes
+worklistController.registerRoutes(fastify);
 
 // Routes
 fastify.get('/', async (request, reply) => {

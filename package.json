@@ -10,7 +10,10 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "worklist": "node bin/worklist-cli.js",
+    "worklist:cli": "node bin/worklist-cli.js",
+    "test:worklist": "node test/test-worklist.js"
   },
   "keywords": ["fastify", "prisma", "mysql", "radiologi"],
   "author": "",
