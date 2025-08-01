@@ -11,7 +11,8 @@ A FastAPI application with Prisma ORM for database management and Orthanc DICOM 
 - CORS support
 - Health check endpoint
 - **🆕 Orthanc DICOM Worklist Generator**
-  - Generate DICOM worklist files for Orthanc PACS
+  - Generate proper DICOM binary files for Orthanc PACS
+  - Full DICOM Part 10 compliance
   - RESTful API for worklist management
   - Interactive CLI tool
   - Batch worklist creation

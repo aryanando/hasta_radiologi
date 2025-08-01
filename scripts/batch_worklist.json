@@ -1,0 +1,35 @@
+[
+  {
+    "patientId": "P001",
+    "patientName": "BATCH^PATIENT^ONE",
+    "patientBirthDate": "1990-01-01",
+    "patientSex": "M",
+    "accessionNumber": "ACC001",
+    "studyDescription": "Chest X-Ray",
+    "scheduledDate": "2025-08-02",
+    "scheduledTime": "09:00",
+    "modality": "CR"
+  },
+  {
+    "patientId": "P002",
+    "patientName": "BATCH^PATIENT^TWO",
+    "patientBirthDate": "1985-06-15",
+    "patientSex": "F",
+    "accessionNumber": "ACC002",
+    "studyDescription": "Abdomen CT",
+    "scheduledDate": "2025-08-02",
+    "scheduledTime": "10:30",
+    "modality": "CT"
+  },
+  {
+    "patientId": "P003",
+    "patientName": "BATCH^PATIENT^THREE",
+    "patientBirthDate": "1975-12-20",
+    "patientSex": "M",
+    "accessionNumber": "ACC003",
+    "studyDescription": "Brain MRI",
+    "scheduledDate": "2025-08-02",
+    "scheduledTime": "14:00",
+    "modality": "MR"
+  }
+]

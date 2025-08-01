@@ -124,27 +124,51 @@ The CLI provides the following options:
 
 ## DICOM Worklist Format
 
-The generated worklist files use DICOM tag format:
+The generated worklist files are proper DICOM binary files with `.dcm` extension containing the following DICOM elements:
+
+### File Structure
+- **DICOM Preamble**: 128 bytes of zeros followed by "DICM"
+- **File Meta Information**: Standard DICOM meta header
+- **Patient Information Elements**:
+  - `(0010,0020)` Patient ID
+  - `(0010,0010)` Patient Name  
+  - `(0010,0030)` Patient Birth Date
+  - `(0010,0040)` Patient Sex
+
+### Key DICOM Elements Included
 
 ```
-# Patient Information
-(0010,0020) P123456                                    # Patient ID
-(0010,0010) DOE^JOHN^MIDDLE                           # Patient Name
-(0010,0030) 19850515                                  # Patient Birth Date
-(0010,0040) M                                         # Patient Sex
+Patient Information:
+(0010,0020) LO Patient ID
+(0010,0010) PN Patient Name (LastName^FirstName^MiddleName)
+(0010,0030) DA Patient Birth Date (YYYYMMDD)
+(0010,0040) CS Patient Sex (M/F/U)
 
-# Study Information
-(0020,000D) 1.2.826.0.1.3680043.8.498.1722524400000.1234  # Study Instance UID
-(0008,0050) ACC123456                                 # Accession Number
-(0008,1030) Chest X-Ray                              # Study Description
+Study Information:
+(0020,000D) UI Study Instance UID
+(0008,0050) SH Accession Number
+(0008,1030) LO Study Description
 
-# Scheduled Procedure Step Information
-(0040,0100)[0].(0008,0060) CR                         # Modality
-(0040,0100)[0].(0040,0001) ORTHANC                    # Scheduled Station AE Title
-(0040,0100)[0].(0040,0002) 20250802                   # Scheduled Procedure Step Start Date
-(0040,0100)[0].(0040,0003) 143000                     # Scheduled Procedure Step Start Time
-(0040,0100)[0].(0040,0007) Chest X-Ray PA and Lateral # Scheduled Procedure Step Description
+Scheduled Procedure Step Sequence (0040,0100):
+(0008,0060) CS Modality
+(0040,0001) AE Scheduled Station AE Title
+(0040,0002) DA Scheduled Procedure Step Start Date
+(0040,0003) TM Scheduled Procedure Step Start Time
+(0040,0007) LO Scheduled Procedure Step Description
+(0040,0009) SH Scheduled Procedure Step ID
+(0040,0006) PN Scheduled Performing Physician Name
+
+Institution Information:
+(0008,0080) LO Institution Name
+(0008,1040) LO Institution Department Name
+
+Procedure Information:
+(0032,1060) LO Requested Procedure Description
+(0040,1001) SH Requested Procedure ID
+(0008,0090) PN Referring Physician Name
 ```
+
+**Format**: These are proper DICOM Part 10 files with binary encoding, fully compatible with Orthanc and other DICOM systems.
 
 ## Data Validation
 
@@ -173,8 +197,12 @@ Optional fields:
 ### Directory Structure
 Worklist files are stored in the `worklists/` directory with the naming pattern:
 ```
-wl_{patientId}_{accessionNumber}_{timestamp}.wl
+{accessionNumber}_{timestamp}.dcm
 ```
+
+Examples:
+- `ACC001_1754057357681.dcm`
+- `ACC_BATCH_001_1754057357683.dcm`
 
 ### Cleanup Features
 - Automatic cleanup of old files
@@ -285,9 +313,16 @@ const fastify = require('fastify')({
 });
 ```
 
-Check worklist file contents:
+Check DICOM file structure:
 ```bash
-cat worklists/wl_P001_ACC001_1722524400000.wl
+# View DICOM file header
+hexdump -C worklists/ACC001_1754057357681.dcm | head -10
+
+# Check for DICOM marker
+strings worklists/ACC001_1754057357681.dcm | head -5
+
+# Use DICOM tools if available
+dcmdump worklists/ACC001_1754057357681.dcm
 ```
 
 ## Future Enhancements

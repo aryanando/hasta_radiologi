@@ -1,12 +1,12 @@
-const OrthancWorklistService = require('../services/orthancWorklistService');
+const DockerDicomWorklistService = require('../services/dockerDicomWorklistService');
 
 /**
  * Orthanc Worklist Controller
- * Handles HTTP requests for worklist operations
+ * Handles HTTP requests for DICOM worklist operations using Docker wl-generator
  */
 class OrthancWorklistController {
   constructor() {
-    this.worklistService = new OrthancWorklistService();
+    this.worklistService = new DockerDicomWorklistService();
   }
 
   /**
@@ -93,6 +93,9 @@ class OrthancWorklistController {
 
     // Generate sample worklist data
     fastify.get('/api/worklist/sample', this.generateSampleData.bind(this));
+
+    // Create sample worklist using Python
+    fastify.post('/api/worklist/sample', this.createSampleWorklist.bind(this));
 
     // Download worklist file
     fastify.get('/api/worklist/download/:filename', {
@@ -232,6 +235,27 @@ class OrthancWorklistController {
         message: 'Sample data generated',
         data: sampleData
       });
+    } catch (error) {
+      reply.code(500).send({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Create sample worklist using Python
+   */
+  async createSampleWorklist(request, reply) {
+    try {
+      const result = await this.worklistService.createSampleWorklist();
+      
+      if (result.success) {
+        reply.code(201).send(result);
+      } else {
+        reply.code(400).send(result);
+      }
     } catch (error) {
       reply.code(500).send({
         success: false,

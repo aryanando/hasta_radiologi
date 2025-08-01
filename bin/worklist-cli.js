@@ -91,6 +91,7 @@ class OrthancWorklistCLI {
         console.log('✅ Worklist created successfully!');
         console.log(`📁 File: ${result.data.filename}`);
         console.log(`📍 Path: ${result.data.filepath}`);
+        console.log('💡 Note: Generated as DICOM (.dcm) file for Orthanc compatibility');
       } else {
         console.log('❌ Failed to create worklist:');
         console.log(result.message);
@@ -197,7 +198,7 @@ class OrthancWorklistCLI {
       const result = await worklistService.getAllWorklists();
 
       if (result.success && result.data.files.length > 0) {
-        console.log(`Found ${result.data.count} worklist file(s):\n`);
+        console.log(`Found ${result.data.count} DICOM worklist file(s):\n`);
         
         result.data.files.forEach((file, index) => {
           console.log(`${index + 1}. ${file.filename}`);
@@ -215,7 +216,7 @@ class OrthancWorklistCLI {
           console.log(`   Average size: ${Math.round(statsResult.data.averageSize)} bytes`);
         }
       } else {
-        console.log('No worklist files found.');
+        console.log('No DICOM worklist files found.');
       }
     } catch (error) {
       console.log('❌ Error:', error.message);

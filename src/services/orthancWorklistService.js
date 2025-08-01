@@ -1,12 +1,12 @@
-const OrthancWorklistGenerator = require('../generators/orthancWorklistGenerator');
+const DicomWorklistGenerator = require('../generators/dicomWorklistGenerator');
 
 /**
  * Orthanc Worklist Service
- * Service layer for managing Orthanc worklist operations
+ * Service layer for managing Orthanc worklist operations with proper DICOM format
  */
 class OrthancWorklistService {
   constructor() {
-    this.generator = new OrthancWorklistGenerator();
+    this.generator = new DicomWorklistGenerator();
   }
 
   /**
