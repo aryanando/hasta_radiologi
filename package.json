@@ -1,0 +1,28 @@
+{
+  "name": "hasta-radiologi",
+  "version": "1.0.0",
+  "description": "Hasta Radiologi API with FastAPI and Prisma",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "fastify start --watch src/app.js",
+    "start": "fastify start src/app.js",
+    "build": "npm run prisma:generate",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
+  },
+  "keywords": ["fastify", "prisma", "mysql", "radiologi"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/env": "^4.3.0",
+    "@prisma/client": "^5.18.0",
+    "fastify": "^4.28.1",
+    "fastify-cli": "^6.3.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.18.0"
+  }
+}
