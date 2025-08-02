@@ -1,0 +1,51 @@
+# DICOM File Format
+# Generated with improved pixel data for OHIF viewing
+
+# Meta Information
+(0002,0001) OB 00\01
+(0002,0002) UI [1.2.840.10008.5.1.4.1.1.1]
+(0002,0003) UI [1.2.826.0.1.3680043.8.498.$(date +%s).3.999]
+(0002,0010) UI [1.2.840.10008.1.2.1]
+(0002,0012) UI [1.2.826.0.1.3680043.8.498.1]
+(0002,0013) SH [HASTA_RADIOLOGI_1.0]
+
+# Patient Information
+(0010,0010) PN [TEST^PATIENT^IMPROVED]
+(0010,0020) LO [TEST999]
+(0010,0030) DA [19900101]
+(0010,0040) CS [M]
+
+# Study Information
+(0020,000d) UI [1.2.826.0.1.3680043.8.498.$(date +%s).1.999]
+(0008,0020) DA [$(date +%Y%m%d)]
+(0008,0030) TM [$(date +%H%M%S)]
+(0008,1030) LO [Test Study Improved]
+(0008,0050) SH [ACC999]
+
+# Series Information
+(0020,000e) UI [1.2.826.0.1.3680043.8.498.$(date +%s).2.999]
+(0020,0011) IS [1]
+(0008,103e) LO [Test Series Improved]
+(0008,0060) CS [CR]
+
+# Instance Information
+(0008,0018) UI [1.2.826.0.1.3680043.8.498.$(date +%s).3.999]
+(0008,0016) UI [1.2.840.10008.5.1.4.1.1.1]
+(0020,0013) IS [1]
+
+# Institution Information
+(0008,0080) LO [Hasta Radiologi]
+(0008,1010) SH [WORKSTATION1]
+
+# Image Information with proper dimensions
+(0028,0010) US 64
+(0028,0011) US 64
+(0028,0100) US 8
+(0028,0101) US 8
+(0028,0102) US 7
+(0028,0103) US 0
+(0028,0002) US 1
+(0028,0004) CS [MONOCHROME2]
+
+# Pixel data - 64x64 8-bit image with recognizable pattern
+(7fe0,0010) OB ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\ff\ff\ff

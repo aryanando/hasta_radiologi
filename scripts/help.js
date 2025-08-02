@@ -29,7 +29,16 @@ console.log('  npm run dev                - Start development server');
 console.log('  npm start                  - Start production server');
 console.log('');
 
-console.log('📡 Example Usage:');
+console.log('�️ PACS Viewer Commands:');
+console.log('  npm run setup:pacs         - Setup OHIF PACS viewer');
+console.log('  npm run start:pacs         - Start PACS viewer');
+console.log('  npm run pacs:setup         - Alias for setup:pacs');
+console.log('  npm run pacs:start         - Alias for start:pacs');
+console.log('  npm run viewer:setup       - Alias for setup:pacs');
+console.log('  npm run viewer:start       - Alias for start:pacs');
+console.log('');
+
+console.log('�📡 Example Usage:');
 console.log('');
 console.log('  # Create and send a single patient:');
 console.log('  npm run quick:single');
@@ -45,7 +54,12 @@ console.log('🌐 After running any command, check Orthanc at:');
 console.log('   http://localhost:8042/app/explorer.html');
 console.log('');
 
-console.log('📝 Need to modify patient data?');
+console.log('�️ To view DICOM images in PACS viewer:');
+console.log('  1. npm run setup:pacs      # Setup viewer (first time only)');
+console.log('  2. npm run start:pacs      # Start viewer at http://localhost:3000');
+console.log('');
+
+console.log('�📝 Need to modify patient data?');
 console.log('   Edit: examples/create-and-send-example.js');
 console.log('   Edit: examples/batch-create-send.js');
 console.log('');
@@ -53,5 +67,7 @@ console.log('');
 console.log('💡 Tips:');
 console.log('  - Make sure Orthanc is running on localhost:4242 (DICOM) and :8042 (Web)');
 console.log('  - Each command creates DICOM files with all required tags');
+console.log('  - PACS viewer connects to Orthanc at localhost:8042');
+console.log('  - Use npm run quick:demo to add test data, then view in PACS');
 console.log('  - No more "missing required tags" errors! 🎉');
 console.log('');

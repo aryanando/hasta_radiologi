@@ -216,18 +216,117 @@ class DicomInstanceService {
 (0008,1050) PN [${data.performingPhysicianName}]
 
 # Image Information (for image SOP classes)
-(0028,0010) US ${data.rows}
-(0028,0011) US ${data.columns}
-(0028,0100) US ${data.bitsAllocated}
-(0028,0101) US ${data.bitsStored}
-(0028,0102) US ${data.highBit}
-(0028,0103) US ${data.pixelRepresentation}
-(0028,0002) US ${data.samplesPerPixel}
-(0028,0004) CS [${data.photometricInterpretation}]
+(0028,0010) US 8
+(0028,0011) US 8
+(0028,0100) US 8
+(0028,0101) US 8
+(0028,0102) US 7
+(0028,0103) US 0
+(0028,0002) US 1
+(0028,0004) CS [MONOCHROME2]
 
-# Minimal pixel data (placeholder for CR image)
-(7fe0,0010) OW 0000\\0000\\0000\\0000
+# Generated pixel data for viewing
+(7fe0,0010) OB ${this.generatePixelData(8, 8, data.modality)}
 `;
+  }
+
+  /**
+   * Generate pixel data for DICOM images
+   */
+  generatePixelData(rows, columns, modality) {
+    // Create minimal 8x8 test image for compatibility
+    const pixels = [
+      'ff', '80', '40', '20', '20', '40', '80', 'ff',
+      '80', 'ff', '80', '40', '40', '80', 'ff', '80', 
+      '40', '80', 'ff', '80', '80', 'ff', '80', '40',
+      '20', '40', '80', 'ff', 'ff', '80', '40', '20',
+      '20', '40', '80', 'ff', 'ff', '80', '40', '20',
+      '40', '80', 'ff', '80', '80', 'ff', '80', '40',
+      '80', 'ff', '80', '40', '40', '80', 'ff', '80',
+      'ff', '80', '40', '20', '20', '40', '80', 'ff'
+    ];
+    
+    return pixels.join('\\\\');
+  }
+
+  /**
+   * Generate simple chest X-ray pattern
+   */
+  generateSimpleChestPattern(row, col, rows, columns) {
+    const centerRow = rows / 2;
+    const centerCol = columns / 2;
+    const distFromCenter = Math.sqrt((row - centerRow) ** 2 + (col - centerCol) ** 2);
+    
+    // Base value
+    let value = 100;
+    
+    // Lung fields (darker)
+    if (distFromCenter < rows * 0.3 && Math.abs(col - centerCol) > columns * 0.1) {
+      value = 50;
+    }
+    
+    // Spine (brighter)
+    if (Math.abs(col - centerCol) < 2) {
+      value = 200;
+    }
+    
+    return value;
+  }
+
+  /**
+   * Generate simple CT pattern
+   */
+  generateSimpleCTPattern(row, col, rows, columns) {
+    const centerRow = rows / 2;
+    const centerCol = columns / 2;
+    const distFromCenter = Math.sqrt((row - centerRow) ** 2 + (col - centerCol) ** 2);
+    
+    if (distFromCenter < rows * 0.4) {
+      return 150; // Brain tissue
+    } else if (distFromCenter < rows * 0.45) {
+      return 220; // Skull
+    } else {
+      return 20; // Air
+    }
+  }
+
+  /**
+   * Generate simple MR pattern
+   */
+  generateSimpleMRPattern(row, col, rows, columns) {
+    const centerRow = rows / 2;
+    const centerCol = columns / 2;
+    const distFromCenter = Math.sqrt((row - centerRow) ** 2 + (col - centerCol) ** 2);
+    
+    if (distFromCenter < rows * 0.4) {
+      return 180; // Brain tissue
+    } else {
+      return 30; // Background
+    }
+  }
+
+  /**
+   * Generate simple ultrasound pattern
+   */
+  generateSimpleUSPattern(row, col, rows, columns) {
+    // Simple gradient
+    return Math.floor((row / rows) * 200) + 30;
+  }
+
+  /**
+   * Generate simple digital X-ray pattern
+   */
+  generateSimpleDXPattern(row, col, rows, columns) {
+    // Checkerboard pattern
+    return ((Math.floor(row / 8) + Math.floor(col / 8)) % 2) * 150 + 50;
+  }
+
+  /**
+   * Generate simple test pattern
+   */
+  generateSimpleTestPattern(row, col, rows, columns) {
+    // Diagonal gradient
+    return Math.floor(((row + col) / (rows + columns)) * 200) + 30;
   }
 
   /**

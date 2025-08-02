@@ -27,7 +27,13 @@
     "quick:batch": "node examples/batch-create-send.js",
     "dicom:send-demo": "npm run demo:create-send",
     "dicom:send-batch": "npm run demo:batch",
-    "help": "node scripts/help.js"
+    "help": "node scripts/help.js",
+    "setup:pacs": "./setup-pacs-viewer.sh",
+    "start:pacs": "./start-pacs-viewer.sh",
+    "pacs:setup": "./setup-pacs-viewer.sh",
+    "pacs:start": "./start-pacs-viewer.sh",
+    "viewer:setup": "./setup-pacs-viewer.sh",
+    "viewer:start": "./start-pacs-viewer.sh"
   },
   "keywords": [
     "fastify",
