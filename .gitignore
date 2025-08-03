@@ -76,3 +76,18 @@ Thumbs.db
 
 # Prisma
 /prisma/migrations/
+
+# DICOM PACS Data - Do not commit sensitive medical data
+orthanc-mwl/db/
+orthanc-mwl/logs/
+orthanc-mwl/plugins/
+orthanc-mwl/worklists/
+
+# DICOM test files - Contains patient data
+test-dicoms/*.dcm
+test-dicoms/*.dump
+instances/*.dcm
+
+# Generated DICOM files
+*.dcm
+*.dump
