@@ -25,6 +25,10 @@ async function app(fastify, options) {
         },
         DATABASE_URL: {
           type: 'string'
+        },
+        ORTHANC_WORKLIST_DIR: {
+          type: 'string',
+          default: path.join(process.cwd(), 'worklists')
         }
       }
     }

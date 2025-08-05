@@ -1,4 +1,4 @@
-const DockerDicomWorklistService = require('../services/dockerDicomWorklistService');
+const OrthancWorklistService = require('../services/orthancWorklistService');
 
 /**
  * Orthanc Worklist Controller
@@ -6,7 +6,7 @@ const DockerDicomWorklistService = require('../services/dockerDicomWorklistServi
  */
 class OrthancWorklistController {
   constructor() {
-    this.worklistService = new DockerDicomWorklistService();
+    this.worklistService = new OrthancWorklistService();
   }
 
   /**
@@ -136,8 +136,8 @@ class OrthancWorklistController {
    */
   async createWorklistBatch(request, reply) {
     try {
-      const { worklists } = request.body;
-      const result = await this.worklistService.createWorklistBatch(worklists);
+      // request.body is already an array according to the route schema
+      const result = await this.worklistService.createWorklistBatch(request.body);
       
       if (result.success) {
         reply.code(201).send(result);

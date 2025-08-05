@@ -1,0 +1,330 @@
+{
+  "info": {
+    "name": "Hasta Radiologi API",
+    "description": "Comprehensive API collection for Hasta Radiologi DICOM worklist and instance management system",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "description": "Base URL for Hasta Radiologi API"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Info",
+      "item": [
+        {
+          "name": "API Health Check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            },
+            "description": "Check API health and get basic information"
+          }
+        },
+        {
+          "name": "Health Endpoint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Dedicated health check endpoint"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orthanc Worklists",
+      "item": [
+        {
+          "name": "Create Single Worklist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patientId\": \"P{{$randomInt}}\",\n  \"patientName\": \"DOE^JOHN^MIDDLE\",\n  \"patientBirthDate\": \"1985-05-15\",\n  \"patientSex\": \"M\",\n  \"accessionNumber\": \"ACC{{$randomInt}}\",\n  \"studyDescription\": \"Chest X-Ray\",\n  \"scheduledDate\": \"2025-08-05\",\n  \"scheduledTime\": \"14:30:00\",\n  \"modality\": \"CR\",\n  \"scheduledStationAETitle\": \"ORTHANC\",\n  \"scheduledProcedureStepDescription\": \"Chest X-Ray PA and Lateral\",\n  \"requestedProcedureDescription\": \"Chest X-Ray - Routine\",\n  \"referringPhysician\": \"DR^SMITH^ROBERT\",\n  \"performingPhysician\": \"DR^JOHNSON^MARY\",\n  \"institutionName\": \"Hasta Radiologi\",\n  \"departmentName\": \"Radiology\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orthanc/worklists",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orthanc", "worklists"]
+            },
+            "description": "Create a new DICOM worklist entry"
+          }
+        },
+        {
+          "name": "Create Batch Worklists",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"patientId\": \"P{{$randomInt}}\",\n    \"patientName\": \"SMITH^JANE^MARIE\",\n    \"patientBirthDate\": \"1990-03-22\",\n    \"patientSex\": \"F\",\n    \"accessionNumber\": \"ACC{{$randomInt}}\",\n    \"modality\": \"CT\",\n    \"scheduledDate\": \"2025-08-06\",\n    \"scheduledTime\": \"09:00:00\",\n    \"scheduledProcedureStepDescription\": \"CT Chest with Contrast\"\n  },\n  {\n    \"patientId\": \"P{{$randomInt}}\",\n    \"patientName\": \"JOHNSON^MIKE^DAVID\",\n    \"patientBirthDate\": \"1975-11-08\",\n    \"patientSex\": \"M\",\n    \"accessionNumber\": \"ACC{{$randomInt}}\",\n    \"modality\": \"MR\",\n    \"scheduledDate\": \"2025-08-06\",\n    \"scheduledTime\": \"11:30:00\",\n    \"scheduledProcedureStepDescription\": \"MRI Brain\"\n  }\n]"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orthanc/worklists/batch",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orthanc", "worklists", "batch"]
+            },
+            "description": "Create multiple DICOM worklist entries"
+          }
+        },
+        {
+          "name": "Get All Worklists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/orthanc/worklists",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orthanc", "worklists"]
+            },
+            "description": "Retrieve list of all DICOM worklist files"
+          }
+        },
+        {
+          "name": "Create Sample Worklist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orthanc/worklists/sample",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orthanc", "worklists", "sample"]
+            },
+            "description": "Create a sample DICOM worklist for testing"
+          }
+        },
+        {
+          "name": "Get Worklist Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/orthanc/worklists/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orthanc", "worklists", "stats"]
+            },
+            "description": "Get statistics about DICOM worklists"
+          }
+        },
+        {
+          "name": "Delete Worklist File",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/orthanc/worklists/{{worklistFilename}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orthanc", "worklists", "{{worklistFilename}}"],
+              "variable": [
+                {
+                  "key": "worklistFilename",
+                  "value": "ACC123456_1754275552477.wl",
+                  "description": "Filename of the worklist to delete"
+                }
+              ]
+            },
+            "description": "Delete a specific DICOM worklist file"
+          }
+        },
+        {
+          "name": "Cleanup Old Worklists",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"daysOld\": 30\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orthanc/worklists/cleanup",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orthanc", "worklists", "cleanup"]
+            },
+            "description": "Clean up old DICOM worklist files"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DICOM Instances",
+      "item": [
+        {
+          "name": "Create DICOM Instance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patientID\": \"P{{$randomInt}}\",\n  \"patientName\": \"WILSON^SARAH^ANNE\",\n  \"patientBirthDate\": \"19880412\",\n  \"patientSex\": \"F\",\n  \"studyDescription\": \"CT Chest with Contrast\",\n  \"seriesDescription\": \"Axial CT Chest\",\n  \"modality\": \"CT\",\n  \"accessionNumber\": \"ACC{{$randomInt}}\",\n  \"institutionName\": \"Hasta Radiologi\",\n  \"referringPhysicianName\": \"DR^BROWN^MICHAEL\",\n  \"performingPhysicianName\": \"DR^WHITE^LISA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/dicom/instances",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dicom", "instances"]
+            },
+            "description": "Create a new DICOM instance file"
+          }
+        },
+        {
+          "name": "Create Batch DICOM Instances",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"patientID\": \"P{{$randomInt}}\",\n    \"patientName\": \"TAYLOR^JAMES^ROBERT\",\n    \"patientBirthDate\": \"19920715\",\n    \"patientSex\": \"M\",\n    \"studyDescription\": \"MRI Brain\",\n    \"seriesDescription\": \"T1 Axial\",\n    \"modality\": \"MR\",\n    \"accessionNumber\": \"ACC{{$randomInt}}\"\n  },\n  {\n    \"patientID\": \"P{{$randomInt}}\",\n    \"patientName\": \"DAVIS^EMMA^GRACE\",\n    \"patientBirthDate\": \"19951203\",\n    \"patientSex\": \"F\",\n    \"studyDescription\": \"Chest X-Ray\",\n    \"seriesDescription\": \"PA and Lateral\",\n    \"modality\": \"CR\",\n    \"accessionNumber\": \"ACC{{$randomInt}}\"\n  }\n]"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/dicom/instances/batch",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dicom", "instances", "batch"]
+            },
+            "description": "Create multiple DICOM instances in batch"
+          }
+        },
+        {
+          "name": "Get All DICOM Instances",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dicom/instances",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dicom", "instances"]
+            },
+            "description": "Retrieve list of all DICOM instance files"
+          }
+        },
+        {
+          "name": "Get Instance Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dicom/instances/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dicom", "instances", "stats"]
+            },
+            "description": "Get statistics about DICOM instances"
+          }
+        },
+        {
+          "name": "Delete DICOM Instance",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dicom/instances/{{instanceFilename}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dicom", "instances", "{{instanceFilename}}"],
+              "variable": [
+                {
+                  "key": "instanceFilename",
+                  "value": "instance_P123456_1754275552477.dcm",
+                  "description": "Filename of the DICOM instance to delete"
+                }
+              ]
+            },
+            "description": "Delete a specific DICOM instance file"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set dynamic variables for testing",
+          "pm.globals.set('timestamp', Date.now());",
+          "pm.globals.set('testPatientId', 'P' + Date.now());",
+          "pm.globals.set('testAccessionNumber', 'ACC' + Date.now());",
+          "",
+          "// Log request info",
+          "console.log('🚀 Request:', pm.request.method, pm.request.url.toString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Basic response validation",
+          "pm.test('Status code is success', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+          "});",
+          "",
+          "pm.test('Response has success property', function () {",
+          "    const jsonData = pm.response.json();",
+          "    if (jsonData.hasOwnProperty('success')) {",
+          "        pm.expect(jsonData.success).to.be.true;",
+          "    }",
+          "});",
+          "",
+          "pm.test('Response time is acceptable', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});",
+          "",
+          "// Log response info",
+          "console.log('✅ Response:', pm.response.status, pm.response.responseTime + 'ms');"
+        ]
+      }
+    }
+  ]
+}

@@ -91,7 +91,7 @@ class OrthancWorklistCLI {
         console.log('✅ Worklist created successfully!');
         console.log(`📁 File: ${result.data.filename}`);
         console.log(`📍 Path: ${result.data.filepath}`);
-        console.log('💡 Note: Generated as DICOM (.dcm) file for Orthanc compatibility');
+        console.log('💡 Note: Generated as DICOM (.wl) file for Orthanc worklist compatibility');
       } else {
         console.log('❌ Failed to create worklist:');
         console.log(result.message);
