@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const OrthancWorklistService = require('../src/services/orthancWorklistService');
+const WorklistService = require('../lib/worklistService');
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -8,7 +8,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const worklistService = new OrthancWorklistService();
+const worklistService = new WorklistService();
 
 /**
  * CLI Tool for Orthanc Worklist Generation
